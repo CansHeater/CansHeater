@@ -1,0 +1,36 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="15px">
+  <mat-card fxFlex>
+    <mat-card-header>
+      <mat-card-title>Temperatures over the last 24h</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="displayCharts" style="display: block;">
+        <canvas baseChart
+                    [datasets]="temperaturesChartData"
+                    [labels]="temperaturesChartLabels"
+                    [options]="temperaturesChartOptions"
+                    [colors]="temperaturesChartColors"
+                    [legend]="temperaturesChartLegend"
+                    [chartType]="temperaturesChartType">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex>
+    <mat-card-header>
+      <mat-card-title>Heater efficiency (temperature out/in ratio)</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="displayCharts" style="display: block;">
+        <canvas baseChart
+                    [datasets]="ratioChartData"
+                    [labels]="ratioChartLabels"
+                    [options]="ratioChartOptions"
+                    [colors]="ratioChartColors"
+                    [legend]="ratioChartLegend"
+                    [chartType]="ratioChartType">
+        </canvas>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,109 @@
+let Info = require('./info');
+
+
+var appRouter = function (app) {
+    app.get("/", function(req, res) {
+        res.status(200).send("Welcome to our restful API");
+    });
+
+    //Méthode pour demander tout les fichiers dans la base
+    app.get("/info", function(req, res) {
+        Info.find({},function (err,infos) {
+            if (err) throw err;
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).send(infos);
+        });
+    });
+
+
+
+    //Méthode pour envoyer les données de la carte au serveur et les stocker en base de donnée
+    app.post('/info',function(req, res) {
+
+        var infos = new Info({
+            time: new Date().toLocaleString(),
+            speed: req.body.speed,
+            tempIn:req.body.tempIn,
+            tempOut:req.body.tempOut
+        });
+        infos.printInfo();
+        infos.save(function(err) {
+            if (err) throw err;
+
+            console.log('Infos are added');
+        });
+        res.setHeader("Content-Type", "application/json");
+        res.status(201).send(req.body); // 201 pour confirmer la bonne création de la ressource
+    });
+
+
+
+    //Méthode pour demander les temperatures
+    app.get("/info/temperatures", function(req, res) {
+        Info.find({},function (err,infos) {
+            if (err) throw err;
+            var temperatures=[];
+            infos.forEach(function (info) {
+                temperatures.push({"time":info.time,"tempIn":info.tempIn,"tempOut":info.tempOut});
+            });
+            console.log(temperatures);
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).send(temperatures);
+        });
+    });
+
+    //Méthode pour envoyer la vitesse
+    app.get("/getspeed", function(req, res) {
+
+        Info.find().sort({x:1}).findOne({},function (err,info) {
+            if (err) throw err;
+
+            res.setHeader('Content-Type', 'application/json');
+            if (info.tempIn>info.tempOut) {
+                res.status(200).send({"speed": 0});
+            }else{
+                res.status(200).send({"speed":(info.tempOut-info.tempIn)*10});
+            }
+
+        });
+
+    });
+
+    //Méthode pour envoyer les infos d'une date
+    app.get("/info/date", function(req, res) {
+
+
+        Info.find({},function (err,infos) {
+            if (err) throw err;
+
+            var date=req.body.date;
+            var temperatures = [];
+            infos.forEach(function (info) {
+                if(info.time.includes(date)){
+                    temperatures.push({"time":info.time,"tempIn":info.tempIn,"tempOut":info.tempOut});
+                }
+            });
+
+            res.status(200).send(temperatures);
+            res.setHeader('Content-Type', 'application/json');
+		
+        });
+
+    });
+
+
+
+
+    //Renvoyer des fichiers html est possible (mais partie front)
+    /*app.get('/test', function(req, res){
+        res.sendFile("/views/index.html"); //if html file is within public directory
+    });*/
+
+    app.use(function(req, res, next){
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(404).send('Page introuvable !');
+    });
+
+}
+
+module.exports = appRouter;

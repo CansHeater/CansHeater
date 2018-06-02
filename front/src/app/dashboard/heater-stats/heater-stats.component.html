@@ -1,0 +1,25 @@
+<div id="heater-stats">
+  <div fxLayout="row">
+    <a mat-icon-button (click)="refresh()"><mat-icon>autorenew</mat-icon></a>
+    <div fxFlex></div>
+    <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+            (dateInput)="selectedDateChanged($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <app-current-stats
+        [refreshRequested]="currentStatsRefreshRequested"
+        (updated)="currentStatsUpdated()"></app-current-stats>
+  </div>
+  <div>
+    <app-temperatures-charts
+        [refreshRequested]="temperaturesChartsRefreshRequested"
+        [specificDate]="selectedDate"
+        (updated)="temperaturesChartsUpdated()"></app-temperatures-charts>
+  </div>
+</div>

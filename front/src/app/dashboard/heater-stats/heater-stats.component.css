@@ -1,0 +1,13 @@
+div#heater-stats {
+  padding: 10px;
+}
+
+div#heater-stats > div {
+  padding: 7px 0;
+}
+
+@media screen and (min-width: 600px) {
+  div#heater-stats {
+    padding: 15px 50px;
+  }
+}

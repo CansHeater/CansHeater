@@ -1,0 +1,15 @@
+mat-toolbar {
+  height: auto;
+  padding: 10px;
+  box-shadow: 0 0 7px #888;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+@media screen and (min-width: 960px) {
+  mat-toolbar {
+    padding: 10px 50px;
+  }
+}

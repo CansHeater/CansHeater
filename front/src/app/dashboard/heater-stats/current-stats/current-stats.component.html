@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="15px">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxFlex>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Status</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">{{ (status) ? 'ON' : 'OFF' }}</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Targeted temperature</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">{{ temperatureTargeted }}°C</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxFlex>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Temperature in</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">{{ temperatureIn }}°C</div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Temperature out</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">{{ temperatureOut }}°C</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

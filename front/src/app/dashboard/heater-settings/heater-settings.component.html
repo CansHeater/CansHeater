@@ -1,0 +1,49 @@
+<div id="heater-settings">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="15px" fxFlex>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Status</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">
+          <mat-slide-toggle [checked]="status" (change)="sliderTriggered($event)">
+            {{ (status) ? 'ON' : 'OFF' }}
+          </mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+      <mat-card-header>
+        <mat-card-title>Targeted temperature</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="value">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Targeted temperature"
+                [(ngModel)]="temperatureTargeted">
+          </mat-form-field>
+          <a (click)="targetTempUpdated()" mat-button>Apply</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Other settings</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div fxLayout="column" fxLayoutGap="15">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="City"
+                [(ngModel)]="city">
+          </mat-form-field>
+        </div>
+        <div>
+          <a (click)="otherSettingsUpdated()" mat-button>Apply</a>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>

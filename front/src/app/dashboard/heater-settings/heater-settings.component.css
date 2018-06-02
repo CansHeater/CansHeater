@@ -1,0 +1,17 @@
+div#heater-settings {
+  padding: 10px;
+}
+
+div#heater-settings > div {
+  padding: 7px 0;
+}
+
+div.value {
+  text-align: center;
+}
+
+@media screen and (min-width: 600px) {
+  div#heater-settings {
+    padding: 15px 50px;
+  }
+}

@@ -1,0 +1,12 @@
+<mat-toolbar role="heading" color="primary">
+  <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+    <div>
+      <a (click)="toogleNavbar()" fxHide.gt-sm="true" mat-icon-button><mat-icon>menu</mat-icon></a>
+      <a mat-button><mat-icon>assessment</mat-icon> Dashboard</a>
+    </div>
+    <div fxHide.lt-md="true" fxFlex></div>
+    <div fxLayout="row" fxLayout.lt-md="column" [fxHide.lt-md]="hidden">
+      <div><a mat-button>Sign out</a></div>
+    </div>
+  </div>
+</mat-toolbar>
